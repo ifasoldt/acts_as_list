@@ -321,6 +321,7 @@ module ActiveRecord
           position ||= send(position_column).to_i
           db_position = self.class.where(id: id).select(position_column).first[position_column].to_i
           if position != db_position
+            warn "For record #{id} db_position is different #{position} != #{db_position}"
             debugger
           end
           acts_as_list_list.where("#{quoted_position_column_with_table_name} > ?", position).decrement_all
