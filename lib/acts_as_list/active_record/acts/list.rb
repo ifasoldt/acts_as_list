@@ -320,8 +320,9 @@ module ActiveRecord
           return unless in_list?
           position ||= send(position_column).to_i
           db_position = self.class.where(id: id).select(position_column).first[position_column].to_i
+          debugger
           if position != db_position
-            debugger
+            position
           end
           acts_as_list_list.where("#{quoted_position_column_with_table_name} > ?", position).decrement_all
         end
